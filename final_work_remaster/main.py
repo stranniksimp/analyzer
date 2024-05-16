@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, socket
+from flask import Flask, render_template, request
+import socket
 
 app = Flask(__name__, template_folder='templates')
 
@@ -21,24 +22,18 @@ if __name__ == '__main__':
 
 print('Результаты сканирования локального компьютера:')
 def scan_ports():
+    target = 'localhost'
+    num_ports = 1000
 
-
- target = 'localhost'
- num_ports = 1000
-
-
-
- for port in range(1, num_ports + 1):
-        try:
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            sock.settimeout(0.01)
-            result = sock.connect_ex((target, port))
-            if result == 0:
-              print(f"Порт {port} открыт")
-
-
-          sock.close()
-        except socket.error:
+for port in range(1, num_ports + 1):
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(0.01)
+        result = sock.connect_ex((target, port))
+        if result == 0:
+            print(f"Порт {port} открыт")
+        sock.close()
+    except socket.error:
         pass
 
 scan_ports()
