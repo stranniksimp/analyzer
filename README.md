@@ -1,4 +1,4 @@
-![изображение](https://github.com/stranniksimp/analyzer/assets/93402361/39b90391-3e2e-455a-b434-4bf80443f4ba)
+![изображение](https://github.com/stranniksimp/analyzer/assets/93402361/59982fe5-679e-4ae1-b446-1c1004fa1b1f)
 
 # Описание проекта:
 **Проект** - это веб-приложение, разработанное на Flask, которое
