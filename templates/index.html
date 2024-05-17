@@ -1,41 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title> Услуги </title>
 
-    <link rel ='stylesheet' href="style.css">
-    <link href ='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel =''>
-    <link rel="apple-touch-icon" sizes="76x76" href="favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="150x150" href="favicons/favicon-150x150.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
-    <link rel="manifest" href="favicons/site.webmanifest">
-    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#6c5bd5">
-    <meta name="msapplication-TileColor" content="#603cba">
-    <meta name="theme-color" content="#100018">
-    <link rel="stylesheet" href="../css/styles.css">
-<script language="javascript" type="text/javascript">
-function goUrl(){
-var url=document.forms.myForm.elements.usUrl.value;
-window.location = url;
-}
-</script>
+
+     <title>analyzer</title>
+     <style>
+          body {
+               background-color: #24273a;
+               /* Crust */
+               color: #cad3f5;
+               /* Text */
+               font-family: monospace;
+               padding: 20px;
+          }
+
+          h1 {
+               font-size: 30px;
+               margin-bottom: 20px;
+               color: #f4dbd6;
+               /* Rosewater */
+          }
+
+          form {
+               margin-bottom: 20px;
+          }
+
+          input[type="text"] {
+               background-color: #1e2030;
+               /* Mantle */
+               color: #cad3f5;
+               /* Text */
+               border: 1px solid #a6d189;
+               /* Green */
+               padding: 5px;
+               font-family: monospace;
+          }
+
+          button[type="submit"] {
+               background-color: #a6d189;
+               /* Green */
+               color: #24273a;
+               /* Crust */
+               border: none;
+               padding: 5px 10px;
+               font-family: monospace;
+               cursor: pointer;
+          }
+
+          p {
+               margin: 5px 0;
+               color: #eed49f;
+               /* Yellow */
+               font-size: 20px;
+          }
+          .cert-info {
+            white-space: pre-wrap;
+            line-height: 1.5;
+          }
+     </style>
+     <script>
+          function startTimer() {
+               const startTime = new Date().getTime();
+               const checkingMessage = document.createElement('p');
+               checkingMessage.textContent = 'Проверка началась...';
+               document.body.appendChild(checkingMessage);
+
+               const timerInterval = setInterval(() => {
+                    const currentTime = new Date().getTime();
+                    const elapsedTime = currentTime - startTime;
+                    const seconds = Math.floor(elapsedTime / 1000);
+                    checkingMessage.textContent = `Проверка началась... (${seconds} секунд)`;
+               }, 1000);
+
+               return timerInterval;
+          }
+
+          function stopTimer(timerInterval) {
+               clearInterval(timerInterval);
+          }
+     </script>
 </head>
-  <body>
-
-       <div class = 'wrapper'>
-           <form action="">
-               <h1>URL-адрес поиска</h1>
-               <div class ="input-box">
-                   <input type ='text' placeholder="URL-адрес"
-                    required>
-                  <i class='bx bxs-user'></i>
-               </div>
-
-               <button type = 'submit' class = 'btn'>Исследовать</button>
-
-            </form>
-         </div>
-   </body>
-
-   </html>
+<body>
+     <h1>analyzer <a href="https://github.com/stranniksimp/analyzer" target="_blank"><img src="https://icones.pro/wp-content/uploads/2021/06/icone-github-orange.png" alt="GitHub" style="vertical-align: middle; width: 30px; height: 30px; color: #cad3f5; margin-right: 10px;">гитхаб</a></h1>
+     <form method="post" onsubmit="timerInterval = startTimer()">
+         <label for="url" style="font-size: 20px;">Введите URL:</label>
+         <input type="text" id="url" name="url" required>
+         <button type="submit">Проверить</button>
+     </form>
+     {% if load_time %}
+     <h2>Результаты:</h2>
+     <p>{{ load_time }}</p>
+     <p>{{ ping }}</p>
+     <p>{{ dns }}</p>
+     <p class="cert-info">{{ cert }}</p>
+     <p>{{ ip }}</p>
+     <script>stopTimer(timerInterval);</script>
+     {% if screenshot %}
+     <img src="data:image/png;base64,{{ screenshot }}" alt="Website Screenshot">
+     {% endif %}
+     {% endif %}
+ </body>
+ </html>
