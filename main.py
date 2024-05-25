@@ -44,7 +44,7 @@ def take_screenshot(url):
         print(Fore.GREEN + "[+]" + Style.RESET_ALL + r" Скриншот создан")
         return screenshot
     except WebDriverException as e:
-        print(Fore.RED + "[-]" + Style.RESET_ALL + f" Ошибка при создании скриншота для {url}: {e}")
+        print(Fore.RED + "[-]" + Style.RESET_ALL + f" Ошибка при создании скриншота")
         return None
 
 def add_protocol(url):
