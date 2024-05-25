@@ -10,7 +10,6 @@ from colorama import Fore, Style
 from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-import colorama
 from colorama import Fore, Style
 import re
 from selenium.common.exceptions import WebDriverException
@@ -33,7 +32,7 @@ def add_protocol(url):
 
 def take_screenshot(url):
     try:
-        print(Fore.YELLOW + "[*]" + Style.RESET_ALL + r" Начинаю создавать скриншот для {url}")
+        print(Fore.YELLOW + "[*]" + Style.RESET_ALL + r" Начинаю создавать скриншот")
         start_time = time.time()
         chrome_options = Options()
         chrome_options.add_argument("--headless")
@@ -42,7 +41,7 @@ def take_screenshot(url):
         screenshot = driver.get_screenshot_as_base64()
         driver.quit()
         end_time = time.time()
-        print(Fore.GREEN + "[+]" + Style.RESET_ALL + r" Скриншот для {url} создан за {end_time - start_time} секунд")
+        print(Fore.GREEN + "[+]" + Style.RESET_ALL + r" Скриншот создан")
         return screenshot
     except WebDriverException as e:
         print(Fore.RED + "[-]" + Style.RESET_ALL + f" Ошибка при создании скриншота для {url}: {e}")
